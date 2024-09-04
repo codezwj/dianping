@@ -90,10 +90,8 @@ public class CacheClient {
         //已过期，缓存重构，获取互斥锁
         String lockKey = RedisConstants.LOCK_SHOP_KEY + id;
         boolean isLock = tryLock(lockKey);
-        log.info(String.valueOf(isLock));
         //判断获取锁是否成功
         if(isLock){
-            log.info("1");
             System.out.println(stringRedisTemplate.opsForValue().get(lockKey));
             //新建一个线程进行重构
             CACHE_REBUILD_EXECUTOR.submit(()->{
@@ -148,7 +146,6 @@ public class CacheClient {
 
     public boolean tryLock(String key){
         Boolean flag = stringRedisTemplate.opsForValue().setIfAbsent(key,"1",300,TimeUnit.SECONDS);
-        log.info("yes");
         return BooleanUtil.isTrue(flag);
     }
 

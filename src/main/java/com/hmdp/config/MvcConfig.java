@@ -20,10 +20,10 @@ public class MvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns(
                         "/user/code",
                         "/user/login",
-                        "blog/hot",
+                        "/blog/hot",
                         "/shop/**",
                         "/shop-type/**",
-                        "upload/**",
+                        "/upload/**",
                         "/voucher/**"
                 ).order(1);
         registry.addInterceptor(new RefreshTokenInterceptor(stringRedisTemplate)).order(0);
